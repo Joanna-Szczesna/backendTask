@@ -33,13 +33,10 @@ max:
 when input list is null - behaviour like empty list
 when input list cointains null values - count in input size, filter in next steps
 
+### bonus:
+unit tests 
 
-### libraries:
 
-google truth
-junit
- 
- 
 ## TASK2
 
 Again, the input is a long list of integers. Provide a working code that will find all the pairs (in this integer list) that sum up to 13. Each pair in the output should have first number not greater than the second one and lines should be sorted in an ascending order.
@@ -64,6 +61,27 @@ sum must be exact 13
 negative integers allowed
 if empty list / null list / no pair found return "no pairs"
 
+### bonus:
+unit tests 
+
 ## TASK3
 
+The first line of input contains a positive number n, next n lines contains pairs of positive integers, where each pair identifies a connection between two vertices in a graph. Please provide a working code that will give us the answer for the following questions: how many separated graphs are in the input.
 
+Sample:
+
+For the input:
+
+3
+4 3
+1 4
+5 6
+expected output is:
+
+2
+
+### requirements:
+
+
+### bonus:
+TXT file as input :>

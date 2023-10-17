@@ -1,12 +1,13 @@
 package pl.szczesnaj.tasks;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.OptionalInt;
+import java.util.*;
 import java.util.stream.Collectors;
 
 class TaskOne {
+    public static void main(String[] args) {
+        String solution = new TaskOne().solution(InputHandler.getNumberListFromInput());
+        System.out.println(solution);
+    }
 
     String solution(List<Integer> inputNumbers) {
         List<Integer> orderedDistinctElements = getDistinctOrderedElements(inputNumbers);
@@ -28,7 +29,7 @@ class TaskOne {
                 .collect(Collectors.joining(" ")) + System.lineSeparator()
                 + "count: " + count + System.lineSeparator()
                 + "distinct: " + orderedDistinctElements.size() + System.lineSeparator()
-                + "min: " +  min + System.lineSeparator()
+                + "min: " + min + System.lineSeparator()
                 + "max: " + max;
     }
 

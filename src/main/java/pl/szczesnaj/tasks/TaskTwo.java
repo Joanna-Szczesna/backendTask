@@ -9,6 +9,12 @@ import java.util.stream.Collectors;
 class TaskTwo {
     final String NO_PAIRS = "No pairs";
 
+    public static void main(String[] args) {
+        String solution = new TaskTwo()
+                .solution(InputHandler.getNumberListFromInput());
+        System.out.println(solution);
+    }
+
     String solution(List<Integer> inputNumbers) {
         if (inputNumbers == null || inputNumbers.isEmpty()) {
             return NO_PAIRS;

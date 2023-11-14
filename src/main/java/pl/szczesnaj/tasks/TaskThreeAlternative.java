@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import static java.util.function.Predicate.not;
 import static java.util.stream.Collectors.*;
 
 class TaskThreeAlternative {
@@ -27,6 +29,7 @@ class TaskThreeAlternative {
 
     public static void main(String[] args) {
         String fileName = "m_3graphs.txt";
+
         System.out.println(countGraphs(fileName));
     }
 
@@ -34,7 +37,8 @@ class TaskThreeAlternative {
         TaskThreeAlternative task = new TaskThreeAlternative();
         List<Edge> edgeList = getEdgesFromFile(path);
         task.adjacentMatrix = createAdjMatrix(edgeList);
-        List<Graph> graphs = task.findGraphsDeclarativeWay();
+//        List<Graph> graphs = task.findGraphsDeclarativeWay();
+        List<Graph> graphs = task.findGraphsImperativeWay();
 
         return(graphs.size());
     }
@@ -83,24 +87,20 @@ class TaskThreeAlternative {
     private Graph dfs(Integer vertex) {
         ArrayDeque<Integer> stackToUse = new ArrayDeque<>();
         Set<Integer> visitedVertices = new HashSet<>();
-        visitedVertices.add(vertex);
-        Set<Integer> connectedVertices = new HashSet<>();
-        connectedVertices.add(vertex);
-
-        stackToUse.addAll(getAdjacent(vertex));
+        stackToUse.add(vertex);
 
         while (!stackToUse.isEmpty()) {
             Integer popVertex = stackToUse.pop();
-            if (visitedVertices.contains(popVertex)) {
-                continue;
-            }
             visitedVertices.add(popVertex);
-            stackToUse.addAll(getAdjacent(popVertex));
-            connectedVertices.addAll(getAdjacent(popVertex));
-            connectedVertices.add(popVertex);
+            Predicate<Integer> shouldVisit = a -> !visitedVertices.contains(a);
+
+            Set<Integer> elementsToCheck = getAdjacent(popVertex).stream()
+                    .filter(shouldVisit)
+                    .collect(toSet());
+            stackToUse.addAll(elementsToCheck);
         }
 
-        return new Graph((connectedVertices));
+        return new Graph((visitedVertices));
     }
 
     private Set<Integer> getAdjacent(Integer vertex) {
